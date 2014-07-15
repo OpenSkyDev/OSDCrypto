@@ -27,63 +27,19 @@
 #import "OSDCrypto.h"
 #import <CommonCrypto/CommonCrypto.h>
 
-NS_INLINE NSString *OSD_BufferToString(unsigned char *buffer, size_t length) {
-    NSMutableString *string = [NSMutableString stringWithCapacity:(length * 2)];
-    for (NSUInteger idx = 0; idx < length; idx++) {
-        [string appendFormat:@"%02X",buffer[idx]];
-    }
-    return [string copy];
-}
-
 @implementation OSDCrypto
 
 + (NSString *)MD5Data:(NSData *)data {
-    if (!data) {
-        return nil;
-    }
-    CC_LONG length = (CC_LONG)data.length;
-    const void *cData = data.bytes;
-    unsigned char *buffer = malloc(CC_MD5_DIGEST_LENGTH);
-    CC_MD5(cData, length, buffer);
-    NSString *string = OSD_BufferToString(buffer, CC_MD5_DIGEST_LENGTH);
-    free(buffer);
-    return string;
+    return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashMD5);
 }
 + (NSString *)SHA1Data:(NSData *)data {
-    if (!data) {
-        return nil;
-    }
-    CC_LONG length = (CC_LONG)data.length;
-    const void *cData = data.bytes;
-    unsigned char *buffer = malloc(CC_SHA1_DIGEST_LENGTH);
-    CC_SHA1(cData, length, buffer);
-    NSString *string = OSD_BufferToString(buffer, CC_SHA1_DIGEST_LENGTH);
-    free(buffer);
-    return string;
+    return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashSHA1);
 }
 + (NSString *)SHA256Data:(NSData *)data {
-    if (!data) {
-        return nil;
-    }
-    CC_LONG length = (CC_LONG)data.length;
-    const void *cData = data.bytes;
-    unsigned char *buffer = malloc(CC_SHA256_DIGEST_LENGTH);
-    CC_SHA256(cData, length, buffer);
-    NSString *string = OSD_BufferToString(buffer, CC_SHA256_DIGEST_LENGTH);
-    free(buffer);
-    return string;
+    return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashSHA256);
 }
 + (NSString *)SHA512Data:(NSData *)data {
-    if (!data) {
-        return nil;
-    }
-    CC_LONG length = (CC_LONG)data.length;
-    const void *cData = data.bytes;
-    unsigned char *buffer = malloc(CC_SHA512_DIGEST_LENGTH);
-    CC_SHA512(cData, length, buffer);
-    NSString *string = OSD_BufferToString(buffer, CC_SHA512_DIGEST_LENGTH);
-    free(buffer);
-    return string;
+    return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashSHA512);
 }
 
 @end
@@ -95,22 +51,7 @@ NS_INLINE NSString *OSD_BufferToString(unsigned char *buffer, size_t length) {
     return [self hashString:string type:type];
 }
 + (NSString *)hashString:(NSString *)string type:(OSDCryptoHash)type {
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    switch (type) {
-        case OSDCrypto_MD5:
-            return [self MD5Data:data];
-            break;
-        case OSDCrypto_SHA1:
-            return [self SHA1Data:data];
-            break;
-        case OSDCrypto_SHA256:
-            return [self SHA256Data:data];
-            break;
-        case OSDCrypto_SHA512:
-            return [self SHA512Data:data];
-            break;
-    }
-    return nil;
+    return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)[string dataUsingEncoding:NSUTF8StringEncoding], type);
 }
 + (NSString *)hashString:(NSString *)string salt:(NSString *)salt type:(OSDCryptoHash)type {
     NSString *fullString = [NSString stringWithFormat:@"%@&%@",string,salt];
@@ -118,3 +59,124 @@ NS_INLINE NSString *OSD_BufferToString(unsigned char *buffer, size_t length) {
 }
 
 @end
+
+CFStringRef OSDCryptoCreateHashForData(CFDataRef data, OSDCryptoHash type) {
+    const void *cData = CFDataGetBytePtr(data);
+    CC_LONG dataLength = (CC_LONG)CFDataGetLength(data);
+    switch (type) {
+        case OSDCryptoHashMD5:
+            return OSDCryptoCreateMD5Hash(cData, dataLength);
+            break;
+        case OSDCryptoHashSHA1:
+            return OSDCryptoCreateSHA1Hash(cData, dataLength);
+            break;
+        case OSDCryptoHashSHA256:
+            return OSDCryptoCreateSHA256Hash(cData, dataLength);
+            break;
+        case OSDCryptoHashSHA512:
+            return OSDCryptoCreateSHA512Hash(cData, dataLength);
+            break;
+        default:
+            break;
+    }
+    return NULL;
+}
+
+CFStringRef OSDCryptoCreateMD5Hash(const void *data, uint32_t length) {
+    unsigned char *buffer = malloc(CC_MD5_DIGEST_LENGTH);
+    CC_MD5(data, length, buffer);
+    CFStringRef string = OSDCryptoCreateStringFromBuffer(buffer, CC_MD5_DIGEST_LENGTH);
+    free(buffer);
+    return string;
+}
+
+CFStringRef OSDCryptoCreateSHA1Hash(const void *data, uint32_t length) {
+    unsigned char *buffer = malloc(CC_SHA1_DIGEST_LENGTH);
+    CC_SHA1(data, length, buffer);
+    CFStringRef string = OSDCryptoCreateStringFromBuffer(buffer, CC_SHA1_DIGEST_LENGTH);
+    free(buffer);
+    return string;
+}
+
+CFStringRef OSDCryptoCreateSHA256Hash(const void *data, uint32_t length) {
+    unsigned char *buffer = malloc(CC_SHA256_DIGEST_LENGTH);
+    CC_SHA256(data, length, buffer);
+    CFStringRef string = OSDCryptoCreateStringFromBuffer(buffer, CC_SHA256_DIGEST_LENGTH);
+    free(buffer);
+    return string;
+}
+
+CFStringRef OSDCryptoCreateSHA512Hash(const void *data, uint32_t length) {
+    unsigned char *buffer = malloc(CC_SHA512_DIGEST_LENGTH);
+    CC_SHA512(data, length, buffer);
+    CFStringRef string = OSDCryptoCreateStringFromBuffer(buffer, CC_SHA512_DIGEST_LENGTH);
+    free(buffer);
+    return string;
+}
+
+CFStringRef OSDCryptoCreateStringFromBuffer(unsigned char *buffer, size_t length) {
+    CFMutableStringRef string = CFStringCreateMutable(kCFAllocatorDefault, 0);
+    for (size_t idx = 0; idx < length; idx++) {
+        CFStringAppendFormat(string, NULL, CFSTR("%02X"),buffer[idx]);
+    }
+    CFStringRef final = CFStringCreateCopy(kCFAllocatorDefault, string);
+    CFRelease(string);
+    return final;
+}
+
+CFStringRef OSDCryptoCreateHMACSHA1Hash(const void *data, uint32_t dataLength, const void *key, uint32_t keyLength) {
+    unsigned char *buffer = malloc(CC_SHA1_DIGEST_LENGTH);
+    CCHmac(kCCHmacAlgSHA1, key, keyLength, data, dataLength, buffer);
+    CFStringRef string = OSDCryptoCreateStringFromBuffer(buffer, CC_SHA1_DIGEST_LENGTH);
+    free(buffer);
+    return string;
+}
+
+CFStringRef OSDCryptoCreateMD5HashForFile(CFURLRef fileURL) {
+    CFReadStreamRef readStrem = CFReadStreamCreateWithFile(kCFAllocatorDefault, fileURL);
+    if (readStrem == NULL) {
+        return NULL;
+    }
+    if (!CFReadStreamOpen(readStrem)) {
+        CFRelease(readStrem);
+        return NULL;
+    }
+    
+    CC_MD5_CTX hashCtx;
+    CC_MD5_Init(&hashCtx);
+    
+    size_t readSize = 4096;
+    
+    BOOL hasMoreData = YES;
+    UInt8 *buffer = malloc(readSize);
+    while (hasMoreData) {
+        CFIndex byteCount = CFReadStreamRead(readStrem, buffer, readSize);
+        if (byteCount == -1) {
+            break;
+        }
+        if (byteCount == 0) {
+            hasMoreData = NO;
+            continue;
+        }
+        CC_MD5_Update(&hashCtx, buffer, (CC_LONG)byteCount);
+        memset(buffer, 0, readSize);
+    }
+    free(buffer);
+    
+    CFReadStreamClose(readStrem);
+    CFRelease(readStrem);
+    
+    CFStringRef final = NULL;
+    
+    if (!hasMoreData) {
+        void *finalBuffer = malloc(CC_MD5_DIGEST_LENGTH);
+        
+        CC_MD5_Final(finalBuffer, &hashCtx);
+        
+        final = OSDCryptoCreateStringFromBuffer(finalBuffer, CC_MD5_DIGEST_LENGTH);
+        
+        free(finalBuffer);
+    }
+    
+    return final;
+}

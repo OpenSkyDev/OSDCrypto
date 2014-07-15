@@ -29,6 +29,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, OSDCryptoHash) {
+    OSDCryptoHashMD5    = 0,
+    OSDCryptoHashSHA1   = 1,
+    OSDCryptoHashSHA256 = 2,
+    OSDCryptoHashSHA512 = 3
+};
+
 /*!
  *  Wraps CommonCrypto in some helper methods
  */
@@ -69,19 +76,61 @@
 
 @end
 
-typedef NS_ENUM(NSInteger, OSDCryptoHash) {
-    OSDCrypto_MD5    = 0,
-    OSDCrypto_SHA1   = 1,
-    OSDCrypto_SHA256 = 2,
-    OSDCrypto_SHA512 = 3
-};
-
 @interface OSDCrypto (OSDCryptoConvenience)
 
+/**
+ *  Generates a UUID string and hashes it.
+ *
+ *  @param type The type of hash to generate
+ *
+ *  @return A random hashed value
+ */
 + (NSString *)randomHashOfType:(OSDCryptoHash)type;
+/**
+ *  Hashes a string
+ *
+ *  @param string The string to hash
+ *  @param type   The type of hash to perform
+ *
+ *  @return The hashed value of the passed string
+ */
 + (NSString *)hashString:(NSString *)string type:(OSDCryptoHash)type;
+/**
+ *  Hashes a string and appends a salt
+ *
+ *  @param string The string to hash
+ *  @param salt   The string to use as the salt
+ *  @param type   The type of hash to perform
+ *
+ *  @return The hashed value
+ */
 + (NSString *)hashString:(NSString *)string salt:(NSString *)salt type:(OSDCryptoHash)type;
 
 @end
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateHashForData(CFDataRef data, OSDCryptoHash type);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateMD5Hash(const void *data, uint32_t length);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateSHA1Hash(const void *data, uint32_t length);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateSHA256Hash(const void *data, uint32_t length);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateSHA512Hash(const void *data, uint32_t length);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateHMACSHA1Hash(const void *data, uint32_t dataLength, const void *key, uint32_t keyLength);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateStringFromBuffer(unsigned char *buffer, size_t length);
+
+FOUNDATION_EXPORT
+CFStringRef OSDCryptoCreateMD5HashForFile(CFURLRef fileURL);
+
 
 #endif
