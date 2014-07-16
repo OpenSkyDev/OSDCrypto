@@ -34,10 +34,6 @@ int main(int argc, const char * argv[]) {
         
         CFURLRef URL = (__bridge CFURLRef)[NSURL fileURLWithPath:path];
         CFRelease(OSDCryptoCreateMD5HashForFile(URL));
-        
-        while (true) {
-            
-        }
     }
     return 0;
 }
