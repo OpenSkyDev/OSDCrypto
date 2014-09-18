@@ -27,7 +27,7 @@
 #ifndef OSDCrypto_h
 #define OSDCrypto_h
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef NS_ENUM(NSInteger, OSDCryptoHash) {
     OSDCryptoHashMD5    = 0,
