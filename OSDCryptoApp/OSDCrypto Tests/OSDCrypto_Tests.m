@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 OpenSky, LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
 #import "OSDCrypto.h"
 
 @interface OSDCrypto_Tests : XCTestCase
