@@ -74,6 +74,11 @@ typedef NS_ENUM(NSInteger, OSDCryptoHash) {
  */
 + (NSString *)SHA512Data:(NSData *)data;
 
+
++ (NSData *)encryptData:(NSData *)data password:(NSString *)password salt:(NSData **)salt initializationVector:(NSData **)iv error:(NSError **)error;
+
++ (NSData *)decryptData:(NSData *)data password:(NSString *)password salt:(NSData *)salt initializationVector:(NSData *)iv error:(NSError **)error;
+
 @end
 
 @interface OSDCrypto (OSDCryptoConvenience)
@@ -110,27 +115,5 @@ typedef NS_ENUM(NSInteger, OSDCryptoHash) {
 
 FOUNDATION_EXPORT
 CFStringRef OSDCryptoCreateHashForData(CFDataRef data, OSDCryptoHash type);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateMD5Hash(const void *data, uint32_t length);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateSHA1Hash(const void *data, uint32_t length);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateSHA256Hash(const void *data, uint32_t length);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateSHA512Hash(const void *data, uint32_t length);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateHMACSHA1Hash(const void *data, uint32_t dataLength, const void *key, uint32_t keyLength);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateStringFromBuffer(unsigned char *buffer, size_t length);
-
-FOUNDATION_EXPORT
-CFStringRef OSDCryptoCreateMD5HashForFile(CFURLRef fileURL);
-
 
 #endif

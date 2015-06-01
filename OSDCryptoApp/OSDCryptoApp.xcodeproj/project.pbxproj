@@ -13,9 +13,13 @@
 		9479EBD519759DD10070F382 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9479EBD419759DD10070F382 /* XCTest.framework */; };
 		9479EBDB19759DD10070F382 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9479EBD919759DD10070F382 /* InfoPlist.strings */; };
 		9479EBDD19759DD10070F382 /* OSDCrypto_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9479EBDC19759DD10070F382 /* OSDCrypto_Tests.m */; };
-		9479EBE619759DDD0070F382 /* OSDCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 9479EBE519759DDD0070F382 /* OSDCrypto.m */; };
 		9479EBE819759DF70070F382 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9479EBE719759DF70070F382 /* image.jpg */; };
-		9479EBE919759E240070F382 /* OSDCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 9479EBE519759DDD0070F382 /* OSDCrypto.m */; };
+		94B8527D1B1D014A0084A911 /* OSDAESCrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 94B852771B1D014A0084A911 /* OSDAESCrypto.c */; };
+		94B8527E1B1D014A0084A911 /* OSDCoreCrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 94B852791B1D014A0084A911 /* OSDCoreCrypto.c */; };
+		94B8527F1B1D014A0084A911 /* OSDCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B8527C1B1D014A0084A911 /* OSDCrypto.m */; };
+		94B852801B1D01540084A911 /* OSDAESCrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 94B852771B1D014A0084A911 /* OSDAESCrypto.c */; };
+		94B852811B1D01540084A911 /* OSDCoreCrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 94B852791B1D014A0084A911 /* OSDCoreCrypto.c */; };
+		94B852821B1D01540084A911 /* OSDCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B8527C1B1D014A0084A911 /* OSDCrypto.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +57,13 @@
 		9479EBDA19759DD10070F382 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9479EBDC19759DD10070F382 /* OSDCrypto_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSDCrypto_Tests.m; sourceTree = "<group>"; };
 		9479EBDE19759DD10070F382 /* OSDCrypto Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OSDCrypto Tests-Prefix.pch"; sourceTree = "<group>"; };
-		9479EBE419759DDD0070F382 /* OSDCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSDCrypto.h; path = ../../OSDCrypto.h; sourceTree = "<group>"; };
-		9479EBE519759DDD0070F382 /* OSDCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSDCrypto.m; path = ../../OSDCrypto.m; sourceTree = "<group>"; };
 		9479EBE719759DF70070F382 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		94B852771B1D014A0084A911 /* OSDAESCrypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = OSDAESCrypto.c; path = ../../Code/OSDAESCrypto.c; sourceTree = "<group>"; };
+		94B852781B1D014A0084A911 /* OSDAESCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSDAESCrypto.h; path = ../../Code/OSDAESCrypto.h; sourceTree = "<group>"; };
+		94B852791B1D014A0084A911 /* OSDCoreCrypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = OSDCoreCrypto.c; path = ../../Code/OSDCoreCrypto.c; sourceTree = "<group>"; };
+		94B8527A1B1D014A0084A911 /* OSDCoreCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSDCoreCrypto.h; path = ../../Code/OSDCoreCrypto.h; sourceTree = "<group>"; };
+		94B8527B1B1D014A0084A911 /* OSDCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSDCrypto.h; path = ../../Code/OSDCrypto.h; sourceTree = "<group>"; };
+		94B8527C1B1D014A0084A911 /* OSDCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSDCrypto.m; path = ../../Code/OSDCrypto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +117,9 @@
 		9479EBC319759DB60070F382 /* OSDCryptoApp */ = {
 			isa = PBXGroup;
 			children = (
-				9479EBE419759DDD0070F382 /* OSDCrypto.h */,
-				9479EBE519759DDD0070F382 /* OSDCrypto.m */,
+				94B8527B1B1D014A0084A911 /* OSDCrypto.h */,
+				94B8527C1B1D014A0084A911 /* OSDCrypto.m */,
+				94B852831B1D01580084A911 /* Core */,
 				9479EBC419759DB60070F382 /* main.m */,
 				9479EBC819759DB60070F382 /* OSDCryptoApp.1 */,
 				9479EBC619759DB60070F382 /* Supporting Files */,
@@ -144,6 +153,17 @@
 				9479EBDE19759DD10070F382 /* OSDCrypto Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		94B852831B1D01580084A911 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				94B852771B1D014A0084A911 /* OSDAESCrypto.c */,
+				94B852781B1D014A0084A911 /* OSDAESCrypto.h */,
+				94B852791B1D014A0084A911 /* OSDCoreCrypto.c */,
+				94B8527A1B1D014A0084A911 /* OSDCoreCrypto.h */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,7 +210,7 @@
 		9479EBB619759DB60070F382 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "OpenSky, LLC";
 				TargetAttributes = {
 					9479EBD219759DD10070F382 = {
@@ -234,7 +254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9479EBC519759DB60070F382 /* main.m in Sources */,
-				9479EBE619759DDD0070F382 /* OSDCrypto.m in Sources */,
+				94B8527F1B1D014A0084A911 /* OSDCrypto.m in Sources */,
+				94B8527D1B1D014A0084A911 /* OSDAESCrypto.c in Sources */,
+				94B8527E1B1D014A0084A911 /* OSDCoreCrypto.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9479EBE919759E240070F382 /* OSDCrypto.m in Sources */,
+				94B852801B1D01540084A911 /* OSDAESCrypto.c in Sources */,
+				94B852811B1D01540084A911 /* OSDCoreCrypto.c in Sources */,
+				94B852821B1D01540084A911 /* OSDCrypto.m in Sources */,
 				9479EBDD19759DD10070F382 /* OSDCrypto_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +384,7 @@
 		9479EBE219759DD10070F382 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -379,6 +404,7 @@
 		9479EBE319759DD10070F382 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
@@ -410,6 +436,7 @@
 				9479EBCE19759DB60070F382 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9479EBE119759DD10070F382 /* Build configuration list for PBXNativeTarget "OSDCrypto Tests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +445,7 @@
 				9479EBE319759DD10070F382 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

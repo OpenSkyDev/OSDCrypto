@@ -9,6 +9,8 @@
 @import XCTest;
 
 #import "OSDCrypto.h"
+#import "OSDCoreCrypto.h"
+#import "OSDAESCrypto.h"
 
 @interface OSDCrypto_Tests : XCTestCase
 
@@ -73,5 +75,74 @@
     XCTAssertNotNil(hash);
     XCTAssertEqualObjects(hash, @"3AE2480035561E159F78D5FF374804C1");
 }
+- (void)testFileSHA1 {
+    NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"image" withExtension:@"jpg"];
+
+    XCTAssertNotNil(fileURL);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]);
+
+    NSString *hash = (__bridge_transfer id)OSDCryptoCreateSHA1HashForFile((__bridge CFURLRef)fileURL);
+
+    XCTAssertNotNil(hash);
+    XCTAssertEqualObjects(hash, @"6481A3B8D7F0A2F3F4FFE0E5BF10696B0046C7B1");
+}
+
+- (void)testRandomBytes {
+    NSUInteger count = 1000;
+    NSMutableSet *set = [NSMutableSet setWithCapacity:count];
+
+    for (NSUInteger idx = 0; idx < count; idx++) {
+        NSData *data = (__bridge_transfer NSData *)OSDCreateRandomData(32);
+        XCTAssertNotNil(data);
+        XCTAssertFalse([set containsObject:data]);
+        [set addObject:data];
+    }
+}
+
+- (void)testKeyGeneration {
+    NSString *password = @"super-sekretz";
+    NSData *salt = (__bridge_transfer NSData *)OSDCreateRandomData(128);
+
+    NSData *gen_one = (__bridge_transfer NSData *)OSDAESCreateKey((__bridge CFStringRef)password, (__bridge CFDataRef)salt);
+    NSData *gen_two = (__bridge_transfer NSData *)OSDAESCreateKey((__bridge CFStringRef)password, (__bridge CFDataRef)salt);
+
+    XCTAssertEqualObjects(gen_one, gen_two);
+}
+
+- (void)testAESEncryption {
+    NSData *message = [@"My super secret message" dataUsingEncoding:NSUTF8StringEncoding];
+    CFStringRef password = CFSTR("super-sekretz-2");
+    CFDataRef salt = NULL;
+    CFDataRef iv = NULL;
+
+    NSData *data = (__bridge_transfer NSData *)OSDAESCreateEncryptedData((__bridge CFDataRef)message, password, &salt, &iv, NULL);
+
+    XCTAssertNotNil(data);
+
+    NSData *inverse = (__bridge_transfer NSData *)OSDAESCreateDecryptedData((__bridge CFDataRef)data, password, salt, iv, NULL);
+
+    XCTAssertNotNil(inverse);
+    XCTAssertEqualObjects(message, inverse);
+
+    CFRelease(salt);
+    CFRelease(iv);
+}
+
+- (void)testAESEncryptionWrapers {
+    NSData *message = [@"This is super sekret" dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *password = @"password-1";
+
+    NSData *salt = nil;
+    NSData *iv = nil;
+    NSData *encrypted = [OSDCrypto encryptData:message password:password salt:&salt initializationVector:&iv error:NULL];
+
+    XCTAssertNotNil(encrypted);
+
+    NSData *decrypted = [OSDCrypto decryptData:encrypted password:password salt:salt initializationVector:iv error:NULL];
+
+    XCTAssertNotNil(decrypted);
+    XCTAssertEqualObjects(message, decrypted);
+}
+
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OSDCrypto.h"
+#import "OSDCoreCrypto.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {

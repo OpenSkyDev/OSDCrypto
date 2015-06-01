@@ -1,12 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "OSDCrypto"
-  s.version      = "2.0.0"
+  s.version      = "3.0.0"
   s.summary      = "A small collection of hash helpers wrapping CommonCrypto."
   s.homepage     = "https://github.com/OpenSkyDev/OSDCrypto"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Skylar Schipper" => "contact@openskydev.com" }
   s.source       = { :git => "https://github.com/OpenSkyDev/OSDCrypto.git", :tag => s.version.to_s }
   s.requires_arc = true
-  s.source_files  = "OSDCrypto.h", "OSDCrypto.m"
-  s.public_header_files = "*.h"
+  s.source_files  = "Code/**/*.{h,m,c}"
 end
