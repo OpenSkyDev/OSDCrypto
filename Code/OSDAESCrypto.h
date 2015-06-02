@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 OpenSky, LLC. All rights reserved.
 //
 
-#ifndef __OSDCryptoApp__OSDAESCrypto__
-#define __OSDCryptoApp__OSDAESCrypto__
+#ifndef OSDCrypto_OSDAESCrypto_h
+#define OSDCrypto_OSDAESCrypto_h
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <Security/Security.h>
@@ -48,14 +48,14 @@ CFDataRef OSDAESCreateEncryptedData(CFDataRef, CFStringRef, CFDataRef *, CFDataR
  */
 CFDataRef OSDAESCreateDecryptedData(CFDataRef, CFStringRef, CFDataRef, CFDataRef, CFErrorRef *);
 
-uint const kOSDAESKeyRounds;
-CFIndex const kOSDAESSaltSize;
+CF_EXPORT uint const kOSDAESKeyRounds;
+CF_EXPORT CFIndex const kOSDAESSaltSize;
 
 // MARK: - Errors
-CFStringRef const OSDAESErrorDomain;
+CF_EXPORT CFStringRef const OSDAESErrorDomain;
 
-CFIndex const OSDAESError_FailedToCreateKey;
-CFIndex const OSDAESError_CryptorStatus;
+CF_EXPORT CFIndex const OSDAESError_FailedToCreateKey;
+CF_EXPORT CFIndex const OSDAESError_CryptorStatus;
 
 CF_EXTERN_C_END
 

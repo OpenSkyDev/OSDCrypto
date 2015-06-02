@@ -24,8 +24,8 @@
  *
 */
 
-#ifndef OSDCrypto_h
-#define OSDCrypto_h
+#ifndef OSDCrypto_OSDCrypto_h
+#define OSDCrypto_OSDCrypto_h
 
 @import Foundation;
 

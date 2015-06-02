@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 OpenSky, LLC. All rights reserved.
 //
 
-#ifndef __OSDCryptoApp__OSDCoreCrypto__
-#define __OSDCryptoApp__OSDCoreCrypto__
+#ifndef OSDCrypto_OSDCoreCrypto_h
+#define OSDCrypto_OSDCoreCrypto_h
 
 #include <CoreFoundation/CoreFoundation.h>
 
@@ -69,7 +69,7 @@ CFStringRef OSDCryptoCreateMD5HashForFile(CFURLRef);
  */
 CFStringRef OSDCryptoCreateSHA1HashForFile(CFURLRef fileURL);
 
-size_t const OSDCryptoFileHashBockSize;
+CF_EXPORT size_t const OSDCryptoFileHashBockSize;
 
 CF_EXTERN_C_END
 
