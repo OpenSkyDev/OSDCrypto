@@ -110,6 +110,8 @@ CFDataRef __OSDAESCreateData(CCOperation opp, CFDataRef data, CFStringRef passwo
 
     CCCryptorStatus status = CCCrypt(opp, kCCAlgorithmAES, kCCOptionPKCS7Padding | kCCOptionECBMode, key, kCCKeySizeAES256, ivPtr, in_data, in_data_size, buffer, b_size, &real_size);
 
+    CFRelease(key);
+
     if (status != kCCSuccess) {
         if (opp == kCCEncrypt) {
             CFRelease(*ioIV);
