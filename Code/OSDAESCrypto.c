@@ -91,8 +91,12 @@ CFDataRef __OSDAESCreateData(CCOperation opp, CFDataRef data, CFStringRef passwo
 
     if (!key) {
         if (opp == kCCEncrypt) {
-            CFRelease(*ioIV);
-            CFRelease(*ioSalt);
+            if (*ioIV != NULL) {
+                CFRelease(*ioIV);
+            }
+            if (*ioSalt != NULL) {
+                CFRelease(*ioSalt);
+            }
             *ioIV = NULL;
             *ioSalt = NULL;
         }
@@ -114,8 +118,12 @@ CFDataRef __OSDAESCreateData(CCOperation opp, CFDataRef data, CFStringRef passwo
 
     if (status != kCCSuccess) {
         if (opp == kCCEncrypt) {
-            CFRelease(*ioIV);
-            CFRelease(*ioSalt);
+            if (*ioIV != NULL) {
+                CFRelease(*ioIV);
+            }
+            if (*ioSalt != NULL) {
+                CFRelease(*ioSalt);
+            }
             *ioIV = NULL;
             *ioSalt = NULL;
         }
