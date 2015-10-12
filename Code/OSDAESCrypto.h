@@ -9,8 +9,13 @@
 #ifndef OSDCrypto_OSDAESCrypto_h
 #define OSDCrypto_OSDAESCrypto_h
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wauto-import"
+
 #include <CoreFoundation/CoreFoundation.h>
 #include <Security/Security.h>
+
+#pragma clang diagnostic pop
 
 CF_EXTERN_C_BEGIN
 
