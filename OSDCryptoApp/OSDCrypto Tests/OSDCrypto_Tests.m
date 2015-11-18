@@ -144,5 +144,56 @@
     XCTAssertEqualObjects(message, decrypted);
 }
 
+- (void)testAESFromDisk {
+    NSString *password = @"1234567890abcdefghijklmnopqrstuvwxyz";
+
+    NSData *info = [NSData dataWithContentsOfFile:[[[NSBundle bundleForClass:self.class] URLForResource:@"test" withExtension:@"dat"] path]];
+
+    XCTAssertNotNil(info);
+
+    NSDictionary *hash = [NSKeyedUnarchiver unarchiveObjectWithData:info];
+
+    XCTAssertNotNil(hash);
+
+    NSData *iv = hash[@"iv"];
+    NSData *salt = hash[@"salt"];
+    NSData *data = hash[@"data"];
+
+    NSData *raw = [OSDCrypto decryptData:data password:password salt:salt initializationVector:iv error:NULL];
+
+    XCTAssertNotNil(raw);
+
+    NSArray *content = [NSKeyedUnarchiver unarchiveObjectWithData:raw];
+
+    NSArray *valid = @[
+                       @"1638D494-B91E-404B-9A62-4584C01A3B6F",
+                       @"7B1DEAB5-ACC2-40B9-B444-65FA3B860BFE",
+                       @"21AFA5A0-68F4-44DC-B9AB-D50AEB0028C2",
+                       @"3CFF946F-98B7-4EFD-A570-851F0AAC01ED",
+                       @"371C30F4-8D24-4FFF-B38F-4EFC2F401DB2",
+                       @"58DCB357-C968-427D-8A40-4838EB74D348",
+                       @"CEBD3FBA-5D6C-4602-9BFF-748FCAF7480E",
+                       @"5829365C-8165-4C86-91A1-AC4E24A915F8",
+                       @"0760B1AF-3AC6-4313-AEC5-DCCA0AB873D4",
+                       @"E423109D-6361-48F5-AF6C-9FA06C1BEA88",
+                       @"F2B86B13-F805-4B86-A2FA-79C76478DCD6",
+                       @"87C2CAA6-2AB3-4C43-87C2-34523BDE3FE3",
+                       @"ACCB9C94-D1AC-488C-A95D-87D28BB7B8D7",
+                       @"7729D757-A14B-4D1C-964E-1B22EDE7A0CF",
+                       @"2494ADE4-4BDA-442F-8215-3F06E6484616",
+                       @"35800236-BD70-4F9D-B36B-552D8FEA03BE",
+                       @"4DB09348-FD87-40D1-97D1-5E38D91F7945",
+                       @"438C1930-8B58-427E-8077-5DE44B354FE2",
+                       @"A993CD4B-35F0-4A3B-9046-996D16692743",
+                       @"8605D7AA-93B2-46AC-A441-AE30EB875DFA",
+                       @"9A823542-789F-4340-945A-4A57DBFCA5C4",
+                       @"4F1F2068-F219-4ECB-824F-9766AAF7861A",
+                       @"F1F50109-86CE-41CE-82BC-46B0267390D4",
+                       @"7A509FE3-B75E-4172-A625-27B64359E832"
+                       ];
+
+    XCTAssertEqualObjects(content, valid);
+}
+
 
 @end

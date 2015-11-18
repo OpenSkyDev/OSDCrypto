@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7B638D5FDD2A57C5AA6F2D8248F5C50EC5772FA1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7B638D5FDD2A57C5AA6F2D8248F5C50EC5772FA1" : 0,
+    "83F12094C11BCB2E6D3428EE0CAACCE02582324B" : 0,
+    "7BB3BDC2A16671CF88D7D181B67EE3570C9EABF4" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F08925A6-AB3C-49ED-A5C1-06012034805F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7B638D5FDD2A57C5AA6F2D8248F5C50EC5772FA1" : "OSDCrypto\/",
+    "83F12094C11BCB2E6D3428EE0CAACCE02582324B" : "..\/..",
+    "7BB3BDC2A16671CF88D7D181B67EE3570C9EABF4" : "..\/..\/..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "OSDCryptoApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OSDCryptoApp\/OSDCryptoApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:OpenSkyDev\/OSDCrypto.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7B638D5FDD2A57C5AA6F2D8248F5C50EC5772FA1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ministrycentered\/services-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7BB3BDC2A16671CF88D7D181B67EE3570C9EABF4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ministrycentered\/PCOCocoa.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "83F12094C11BCB2E6D3428EE0CAACCE02582324B"
+    }
+  ]
+}

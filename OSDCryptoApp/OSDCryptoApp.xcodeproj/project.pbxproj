@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940EC6AD1BFBDC2600BE9F7D /* test.dat in Resources */ = {isa = PBXBuildFile; fileRef = 940EC6AC1BFBDC2600BE9F7D /* test.dat */; };
 		9479EBC219759DB60070F382 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9479EBC119759DB60070F382 /* Foundation.framework */; };
 		9479EBC519759DB60070F382 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9479EBC419759DB60070F382 /* main.m */; };
 		9479EBC919759DB60070F382 /* OSDCryptoApp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9479EBC819759DB60070F382 /* OSDCryptoApp.1 */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		940EC6AC1BFBDC2600BE9F7D /* test.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = test.dat; sourceTree = "<group>"; };
 		9479EBBE19759DB60070F382 /* OSDCryptoApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OSDCryptoApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		9479EBC119759DB60070F382 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9479EBC419759DB60070F382 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				9479EBE719759DF70070F382 /* image.jpg */,
+				940EC6AC1BFBDC2600BE9F7D /* test.dat */,
 				9479EBDC19759DD10070F382 /* OSDCrypto_Tests.m */,
 				9479EBD719759DD10070F382 /* Supporting Files */,
 			);
@@ -210,7 +213,7 @@
 		9479EBB619759DB60070F382 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "OpenSky, LLC";
 				TargetAttributes = {
 					9479EBD219759DD10070F382 = {
@@ -241,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940EC6AD1BFBDC2600BE9F7D /* test.dat in Resources */,
 				9479EBDB19759DD10070F382 /* InfoPlist.strings in Resources */,
 				9479EBE819759DF70070F382 /* image.jpg in Resources */,
 			);
@@ -310,6 +314,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -396,6 +401,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "OSDCrypto Tests/OSDCrypto Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.openskydev.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -412,6 +418,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OSDCrypto Tests/OSDCrypto Tests-Prefix.pch";
 				INFOPLIST_FILE = "OSDCrypto Tests/OSDCrypto Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.openskydev.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
