@@ -54,6 +54,13 @@ CFStringRef OSDCryptoCreateSHA512Hash(const void *, uint32_t);
 CFStringRef OSDCryptoCreateHMACSHA1Hash(const void *, uint32_t, const void *, uint32_t);
 
 /**
+ *  Create a HMAC-SHA1 Data Hash
+ *
+ *  (data, length, key, key-length)
+ */
+CFDataRef OSDCryptoCreateHMACSHA1(const void *, uint32_t, const void *, uint32_t);
+
+/**
  *  Create a CFStringRef of the hex digest.  Lenght of the sting (hard cap).
  *
  *  (buffer, length)

@@ -111,6 +111,8 @@ typedef NS_ENUM(NSInteger, OSDCryptoHash) {
  */
 + (NSString *)hashString:(NSString *)string salt:(NSString *)salt type:(OSDCryptoHash)type;
 
++ (NSData *)HMCASHA1Data:(NSData *)data key:(NSData *)key;
+
 @end
 
 FOUNDATION_EXPORT

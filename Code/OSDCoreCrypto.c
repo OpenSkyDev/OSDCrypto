@@ -62,6 +62,14 @@ CFStringRef OSDCryptoCreateHMACSHA1Hash(const void *data, uint32_t dataLength, c
     return string;
 }
 
+CFDataRef OSDCryptoCreateHMACSHA1(const void *data, uint32_t dataLength, const void *key, uint32_t keyLength) {
+    unsigned char *buffer = malloc(CC_SHA1_DIGEST_LENGTH);
+    CCHmac(kCCHmacAlgSHA1, key, keyLength, data, dataLength, buffer);
+    CFDataRef output = CFDataCreate(kCFAllocatorDefault, buffer, CC_SHA1_DIGEST_LENGTH);
+    free(buffer);
+    return output;
+}
+
 CFStringRef OSDCryptoCreateMD5HashForFile(CFURLRef fileURL) {
     CFReadStreamRef readStrem = CFReadStreamCreateWithFile(kCFAllocatorDefault, fileURL);
     if (readStrem == NULL) {

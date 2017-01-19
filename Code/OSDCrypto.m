@@ -33,6 +33,7 @@
 + (NSString *)MD5Data:(NSData *)data {
     return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashMD5);
 }
+
 + (NSString *)SHA1Data:(NSData *)data {
     return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)data, OSDCryptoHashSHA1);
 }
@@ -95,12 +96,26 @@
     CFRelease(data);
     return string;
 }
+
 + (NSString *)hashString:(NSString *)string type:(OSDCryptoHash)type {
     return (__bridge_transfer id)OSDCryptoCreateHashForData((__bridge CFDataRef)[string dataUsingEncoding:NSUTF8StringEncoding], type);
 }
+
 + (NSString *)hashString:(NSString *)string salt:(NSString *)salt type:(OSDCryptoHash)type {
     NSString *fullString = [NSString stringWithFormat:@"%@&%@",string,salt];
     return [self hashString:fullString type:type];
+}
+
++ (NSData *)HMCASHA1Data:(NSData *)data key:(NSData *)key {
+    const void *cSig = data.bytes;
+    const void *cKey = key.bytes;
+
+    uint32_t sLen = (uint32_t)data.length;
+    uint32_t kLen = (uint32_t)key.length;
+
+    CFDataRef output = OSDCryptoCreateHMACSHA1(cSig, sLen, cKey, kLen);
+
+    return (__bridge_transfer NSData *)output;
 }
 
 @end
