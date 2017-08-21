@@ -36,11 +36,11 @@ CFDataRef OSDAESCreateKey(CFStringRef, CFDataRef);
  *
  *  @param data - The Data to encrypt.  (Required)
  *  @param password - The password used to generate the key.  (Required)
- *  @param (out) salt - Pointer to a data blob to store the salt used to generate the key.  (Required)
- *  @param (out) iv - The Initalization Vector pointer used to encrypt the data.  (Required)
- *  @param (out) error - An error pointer if the encrypt fails. (Optional)
+ *  @param salt (out) - Pointer to a data blob to store the salt used to generate the key.  (Required)
+ *  @param iv (out) - The Initalization Vector pointer used to encrypt the data.  (Required)
+ *  @param error (out) - An error pointer if the encrypt fails. (Optional)
  */
-CFDataRef OSDAESCreateEncryptedData(CFDataRef, CFStringRef, CFDataRef *, CFDataRef *, CFErrorRef *);
+CFDataRef OSDAESCreateEncryptedData(CFDataRef data, CFStringRef password, CFDataRef *salt, CFDataRef *iv, CFErrorRef *error);
 
 /**
  *  AES Encrypt Data
@@ -49,9 +49,9 @@ CFDataRef OSDAESCreateEncryptedData(CFDataRef, CFStringRef, CFDataRef *, CFDataR
  *  @param password - The password used to generate the key.  (Required)
  *  @param salt - Salt that was used to create the key.  (Required)
  *  @param iv - The Initalization Vector used to encrypt the data.  (Required)
- *  @param (out) error - An error pointer if the encrypt fails. (Optional)
+ *  @param error (out) - An error pointer if the encrypt fails. (Optional)
  */
-CFDataRef OSDAESCreateDecryptedData(CFDataRef, CFStringRef, CFDataRef, CFDataRef, CFErrorRef *);
+CFDataRef OSDAESCreateDecryptedData(CFDataRef data, CFStringRef password, CFDataRef salt, CFDataRef iv, CFErrorRef *error);
 
 CF_EXPORT uint const kOSDAESKeyRounds;
 CF_EXPORT CFIndex const kOSDAESSaltSize;
